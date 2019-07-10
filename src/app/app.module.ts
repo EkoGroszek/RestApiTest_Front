@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { MakeATransferComponent } from './make-atransfer/make-atransfer.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { AccountsListComponent } from './accounts-list/accounts-list.component';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { AccountsListComponent } from './accounts-list/accounts-list.component';
     RouterModule,
     AppRoutingModule,
     MDBBootstrapModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

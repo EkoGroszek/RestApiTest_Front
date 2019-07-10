@@ -1,1 +1,20 @@
-<p>accounts-list works!</p>
+<table class="table">
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Numer konta</th>
+    <th scope="col">Saldo</th>
+    <th scope="col">Waluta</th>
+    <th scope="col">Właściciel</th>
+  </tr>
+  </thead>
+
+    <tr *ngFor="let account of accounts">
+      <th>{{account.id}}</th>
+      <th>{{account.accountNumber}}</th>
+      <th>{{account.balance}}</th>
+      <th>{{account.currency}}</th>
+      <th>{{account.owner.name}} {{account.owner.surname}}</th>
+    </tr>
+
+</table>

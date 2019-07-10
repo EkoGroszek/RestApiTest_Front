@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AccountService} from '../services/account.service';
+import {IAccounts} from '../services/accounts';
 
 @Component({
   selector: 'app-accounts-list',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./accounts-list.component.css']
 })
 export class AccountsListComponent implements OnInit {
+  public accounts: IAccounts[];
 
-  constructor() { }
+  constructor(
+    private accountService: AccountService
+  ) {
+  }
 
   ngOnInit() {
+    this.accountService.getAccounts().subscribe(data => this.accounts = data);
   }
 
 }
