@@ -18,10 +18,10 @@ export class AccountService {
     this.headersObject.append('Access-Control-Allow-Origin', '*');
     this.headersObject.append('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     this.headersObject.append('Content-Type', 'application/json');
-    this.headersObject.append(
-      'Authorization',
-      'Basic' + btoa('admin1:password1')
-    );
+    // this.headersObject.append(
+    //   'Authorization',
+    //   'Basic ' + btoa('admin1:password1')
+    // );
   }
 
 
@@ -36,5 +36,17 @@ export class AccountService {
       headers: this.headersObject
     });
   }
+
+  addAccount(account: Account): Observable<Account> {
+    this.prepareHeader();
+
+    return this.http.post<Account>('/api/accounts', {
+      headers: this.headersObject
+    });
+    // return this.http.get<IAccounts[]>('/api/accounts', {
+    //   headers: this.headersObject
+    // });
+  }
+
 
 }

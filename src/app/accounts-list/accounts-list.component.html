@@ -9,12 +9,13 @@
   </tr>
   </thead>
 
-    <tr *ngFor="let account of accounts">
-      <th>{{account.id}}</th>
-      <th>{{account.accountNumber}}</th>
-      <th>{{account.balance}}</th>
-      <th>{{account.currency}}</th>
-      <th>{{account.owner.name}} {{account.owner.surname}}</th>
-    </tr>
+  <tr *ngFor="let account of accounts">
+    <th *ngIf="account.id, else elseBlock">{{account.id}}</th>
+    <th *ngIf="account.accountNumber, else elseBlock">{{account.accountNumber}}</th>
+    <th *ngIf="account.balance, else elseBlock">{{account.balance}}</th>
+    <th *ngIf="account.currency,else elseBlock">{{account.currency}}</th>
+    <th *ngIf="account.owner,else elseBlock">{{account.owner.name}} {{account.owner.surname}}</th>
+    <ng-template #elseBlock><th>NO DATA</th></ng-template>
+  </tr>
 
 </table>
