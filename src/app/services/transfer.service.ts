@@ -1,15 +1,17 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Transfer} from '../entities/transfer';
 import {Observable} from 'rxjs';
-import {IAccounts} from '../entities/accounts';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AccountService {
-
-  private url = '/api/accounts';
+export class TransferService {
+  private url = 'api/transfers';
   private headersObject: HttpHeaders;
+
+  constructor(private  http: HttpClient) {
+  }
 
   private prepareHeader() {
 
@@ -19,26 +21,10 @@ export class AccountService {
     this.headersObject.append('Content-Type', 'application/json');
   }
 
-
-  constructor(private  http: HttpClient) {
-  }
-
-  getAccounts(): Observable<IAccounts[]> {
+  createTransfer(transfer: Transfer): Observable<Transfer> {
     this.prepareHeader();
-    // return this.http.get<IAccounts[]>('/api/accounts/all', {
-    return this.http.get<IAccounts[]>(this.url + '/all', {
+    return this.http.post<Transfer>(this.url, transfer, {
       headers: this.headersObject
     });
   }
-
-  addAccount(account: IAccounts): Observable<IAccounts> {
-    this.prepareHeader();
-
-    return this.http.post<IAccounts>(this.url, account, {
-      // return this.http.post<IAccounts>('/api/accounts', account, {
-      headers: this.headersObject
-    });
-  }
-
-
 }
