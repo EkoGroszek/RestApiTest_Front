@@ -12,6 +12,7 @@ import { MakeATransferComponent } from './make-atransfer/make-atransfer.componen
 import { HomePageComponent } from './home-page/home-page.component';
 import { AccountsListComponent } from './accounts-list/accounts-list.component';
 import {HttpClientModule} from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -29,7 +30,9 @@ import {HttpClientModule} from '@angular/common/http';
     AppRoutingModule,
     MDBBootstrapModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

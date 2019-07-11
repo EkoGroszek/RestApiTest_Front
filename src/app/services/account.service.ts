@@ -37,10 +37,10 @@ export class AccountService {
     });
   }
 
-  addAccount(account: Account): Observable<Account> {
+  addAccount(account: IAccounts): Observable<IAccounts> {
     this.prepareHeader();
 
-    return this.http.post<Account>('/api/accounts', {
+    return this.http.post<IAccounts>('/api/accounts', account,{
       headers: this.headersObject
     });
     // return this.http.get<IAccounts[]>('/api/accounts', {

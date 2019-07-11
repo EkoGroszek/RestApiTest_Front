@@ -7,4 +7,8 @@ export class IAccounts {
   owner: Owner;
   currency: string;
   name: string;
+
+
+  constructor() {
+  }
 }
