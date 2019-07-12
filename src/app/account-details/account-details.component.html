@@ -1,5 +1,9 @@
-<h3>Właściciel konta : </h3>
-<h3>Numer konta : </h3>
+<div *ngIf="accountDetails">
+  <h3>Właściciel konta : {{accountDetails.owner.name + ' ' + accountDetails.owner.surname}}</h3>
+  <h3>Numer konta : {{accountDetails.accountNumber}}</h3>
+  <h3>Saldo: {{accountDetails.balance + ' '  + accountDetails.currency}}</h3>
+</div>
+
 
 <br>
 

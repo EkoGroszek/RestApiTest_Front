@@ -31,6 +31,14 @@ export class AccountService {
     });
   }
 
+  getAccountById(id: string): Observable<IAccounts> {
+    this.prepareHeader();
+    return this.http.get<IAccounts>(this.url + '/' + id, {
+      headers: this.headersObject
+    });
+
+  }
+
   addAccount(account: IAccounts): Observable<IAccounts> {
     this.prepareHeader();
 
