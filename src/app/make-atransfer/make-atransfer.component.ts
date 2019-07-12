@@ -32,6 +32,7 @@ export class MakeATransferComponent implements OnInit {
   onSubmit() {
     this.setAccountDataFromForm();
     console.log(this.transfer);
-    this.transferService.createTransfer(this.transfer).subscribe(data => this.transfer = data);
+    // this.transferService.createTransfer(this.transfer).subscribe(data => this.transfer = data);
+    this.transferService.createTransfer(this.transfer).subscribe();
   }
 }

@@ -1,0 +1,47 @@
+<h3>Właściciel konta : </h3>
+<h3>Numer konta : </h3>
+
+<br>
+
+
+<h2>Wysłane przelewy</h2>
+
+<table class="table">
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">Z konta</th>
+    <th scope="col">Na konto</th>
+    <th scope="col">Kwota</th>
+  </tr>
+  </thead>
+  <tr *ngFor="let transfer of sendedTransfers">
+    <th *ngIf="transfer.sendingAccountNumber, else elseBlock">{{transfer.sendingAccountNumber}}</th>
+    <th *ngIf="transfer.targetAccountNumber, else elseBlock">{{transfer.targetAccountNumber}}</th>
+    <th *ngIf="transfer.amount, else elseBlock">{{transfer.amount}}</th>
+    <ng-template #elseBlock>
+      <th>NO DATA</th>
+    </ng-template>
+  </tr>
+
+</table>
+
+<h2>Odebrane przelewy</h2>
+
+<table class="table">
+  <thead class="thead-light">
+  <tr>
+    <th scope="col">Z konta</th>
+    <th scope="col">Na konto</th>
+    <th scope="col">Kwota</th>
+  </tr>
+  </thead>
+  <tr *ngFor="let transfer of recievedTransfers">
+    <th *ngIf="transfer.sendingAccountNumber, else elseBlock">{{transfer.sendingAccountNumber}}</th>
+    <th *ngIf="transfer.targetAccountNumber, else elseBlock">{{transfer.targetAccountNumber}}</th>
+    <th *ngIf="transfer.amount, else elseBlock">{{transfer.amount}}</th>
+    <ng-template #elseBlock>
+      <th>NO DATA</th>
+    </ng-template>
+  </tr>
+
+</table>

@@ -13,6 +13,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { AccountsListComponent } from './accounts-list/accounts-list.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { AccountDetailsComponent } from './account-details/account-details.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MakeATransferComponent,
     HomePageComponent,
     AccountsListComponent,
+    AccountDetailsComponent,
   ],
   imports: [
     BrowserModule,
