@@ -19,6 +19,8 @@ export class CreateAccountComponent implements OnInit {
   }
 
   currencies = ['PLN', 'EUR', 'GBP'];
+  // owners = new Map();
+  owners  = ['PLN', 'EUR', 'GBP'];
   accountFormGroup: FormGroup;
   owner: Owner = new Owner();
   account: IAccounts = new IAccounts();
@@ -26,6 +28,10 @@ export class CreateAccountComponent implements OnInit {
   get f() {
     return this.accountFormGroup.valid;
   }
+  //
+  // putOwners() {
+  //   this.owner.set("A",1);
+  // }
 
   onSubmit() {
     this.submitted = true;

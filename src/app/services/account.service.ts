@@ -50,10 +50,10 @@ export class AccountService {
   }
 
 
-  updateAccountName(updatedAccountName: AccountnameUpdateDTO, accountId: string): Observable<AccountnameUpdateDTO>{
+  updateAccountName(updatedAccountName: AccountnameUpdateDTO, accountId: string): Observable<AccountnameUpdateDTO> {
     this.prepareHeader();
     console.log(updatedAccountName);
-    return this.http.post<AccountnameUpdateDTO>(this.url + '/update/' + accountId, updatedAccountName,{
+    return this.http.post<AccountnameUpdateDTO>(this.url + '/update/' + accountId, updatedAccountName, {
       headers: this.headersObject
     });
   }

@@ -2,6 +2,7 @@
   <thead class="thead-dark">
   <tr>
     <th scope="col">Id</th>
+    <th scope="col">Nazwa</th>
     <th scope="col">Numer konta</th>
     <th scope="col">Saldo</th>
     <th scope="col">Waluta</th>
@@ -12,12 +13,14 @@
   <tr *ngFor="let account of accounts">
 
     <th *ngIf="account.id, else elseBlock">{{account.id}}</th>
-    <th *ngIf="account.accountNumber, else elseBlock"><a [routerLink]="['accountDetails/' + account.id]" >{{account.accountNumber}}</a></th>
+    <th *ngIf="account.name, else elseNameBlock"><a [routerLink]="['accountDetails/' + account.id]" >{{account.name}}</a></th>
+    <th *ngIf="account.accountNumber, else elseBlock">{{account.accountNumber}}</th>
     <th *ngIf="account.balance, else elseBlock">{{account.balance}}</th>
     <th *ngIf="account.currency,else elseBlock">{{account.currency}}</th>
     <th *ngIf="account.owner,else elseBlock">{{account.owner.name}} {{account.owner.surname}}</th>
 
     <ng-template #elseBlock><th>NO DATA</th></ng-template>
+    <ng-template #elseNameBlock><th><a [routerLink]="['accountDetails/' + account.id]" >NO DATA</a></th></ng-template>
 
 
   </tr>

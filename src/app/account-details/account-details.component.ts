@@ -36,8 +36,7 @@ export class AccountDetailsComponent implements OnInit {
   }
 
   btnClick = function(id) {
-    console.log(id);
     this.router.navigateByUrl('/accountsList/accountDetails/editName/' + id);
-  }
+  };
 
 }
