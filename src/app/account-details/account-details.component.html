@@ -1,4 +1,8 @@
 <div *ngIf="accountDetails">
+  <h2>Nazwa konta: {{accountDetails.name}}
+    <button class="btn btn-sm" (click)="btnClick(accountDetails.id)">Edytuj</button>
+  </h2>
+  <br>
   <h3>Właściciel konta : {{accountDetails.owner.name + ' ' + accountDetails.owner.surname}}</h3>
   <h3>Numer konta : {{accountDetails.accountNumber}}</h3>
   <h3>Saldo: {{accountDetails.balance + ' '  + accountDetails.currency}}</h3>

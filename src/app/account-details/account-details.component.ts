@@ -4,6 +4,7 @@ import {TransferService} from '../services/transfer.service';
 import {Transfer} from '../entities/transfer';
 import {AccountService} from '../services/account.service';
 import {IAccounts} from '../entities/accounts';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account-details',
@@ -18,7 +19,9 @@ export class AccountDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private transferService: TransferService,
-    private accountService: AccountService) {
+    private accountService: AccountService,
+    private router: Router
+  ) {
   }
 
   ngOnInit() {
@@ -30,6 +33,11 @@ export class AccountDetailsComponent implements OnInit {
   onClick(parm: string) {
     console.log(' elo ');
 
+  }
+
+  btnClick = function(id) {
+    console.log(id);
+    this.router.navigateByUrl('/accountsList/accountDetails/editName/' + id);
   }
 
 }

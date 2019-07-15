@@ -1,0 +1,11 @@
+<div class="container">
+  <h1>Zmiana nazwy konta</h1>
+  <form [formGroup]="changeAccountNameFormGroup" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="accountName">Twoja nowa nazwa </label>
+      <input type="text" class="form-control" formControlName="accountName" id="accountName">
+    </div>
+    <button type="submit" class="btn btn-success">Zapisz</button>
+
+  </form>
+</div>

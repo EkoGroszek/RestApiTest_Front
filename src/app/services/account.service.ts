@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {IAccounts} from '../entities/accounts';
+import {AccountnameUpdateDTO} from '../DTO/AccountnameUpdateDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -49,4 +50,11 @@ export class AccountService {
   }
 
 
+  updateAccountName(updatedAccountName: AccountnameUpdateDTO, accountId: string): Observable<AccountnameUpdateDTO>{
+    this.prepareHeader();
+    console.log(updatedAccountName);
+    return this.http.post<AccountnameUpdateDTO>(this.url + '/update/' + accountId, updatedAccountName,{
+      headers: this.headersObject
+    });
+  }
 }
