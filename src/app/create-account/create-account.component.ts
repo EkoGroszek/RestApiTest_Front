@@ -4,6 +4,7 @@ import {IAccounts} from '../entities/accounts';
 import {Owner} from '../entities/owner';
 import {AccountService} from '../services/account.service';
 import {OwnerService} from '../services/owner.service';
+import {ToastrService} from 'ngx-toastr';
 
 
 @Component({
@@ -18,7 +19,9 @@ export class CreateAccountComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private ownerService: OwnerService,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private toastr: ToastrService
+  ) {
   }
 
   private accounts: Account;
@@ -36,6 +39,7 @@ export class CreateAccountComponent implements OnInit {
 
     if (this.accountFormGroup.invalid) {
       console.log('invalid');
+      this.showError();
       return;
     }
 
@@ -43,7 +47,7 @@ export class CreateAccountComponent implements OnInit {
     this.setAccountDataFromForm();
     console.log(this.account);
     this.accountService.addAccount(this.account).subscribe(data => this.account = data);
-
+    this.showSuccess();
   }
 
 
@@ -72,5 +76,12 @@ export class CreateAccountComponent implements OnInit {
     });
   }
 
+  showSuccess() {
+    this.toastr.success('Wykonano przelew!');
+  }
+
+  showError() {
+    this.toastr.error('Sprawdź czy wszystkie pola są poprawne', 'Wykryto błąd w formularzu');
+  }
 
 }

@@ -7,6 +7,7 @@
     <th scope="col">Saldo</th>
     <th scope="col">Waluta</th>
     <th scope="col">Właściciel</th>
+    <th scope="col"></th>
   </tr>
   </thead>
 
@@ -18,6 +19,7 @@
     <th *ngIf="account.balance, else elseBlock">{{account.balance}}</th>
     <th *ngIf="account.currency,else elseBlock">{{account.currency}}</th>
     <th *ngIf="account.owner,else elseBlock">{{account.owner.name}} {{account.owner.surname}}</th>
+    <th><button class="btn btn-danger" (click)="deletaAccount(account.id)">Usuń</button></th>
 
     <ng-template #elseBlock><th>NO DATA</th></ng-template>
     <ng-template #elseNameBlock><th><a [routerLink]="['accountDetails/' + account.id]" >NO DATA</a></th></ng-template>

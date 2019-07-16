@@ -57,4 +57,12 @@ export class AccountService {
       headers: this.headersObject
     });
   }
+
+  deleteAccount(accountId: number) {
+    this.prepareHeader();
+    return this.http.delete(this.url + '/delete/' + accountId, {
+      headers: this.headersObject
+    });
+
+  }
 }

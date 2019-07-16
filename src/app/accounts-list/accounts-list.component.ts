@@ -20,4 +20,8 @@ export class AccountsListComponent implements OnInit {
     // console.log(this.accounts);
   }
 
+  deletaAccount(id: number) {
+    this.accountService.deleteAccount(id).subscribe();
+    window.location.reload();
+  }
 }

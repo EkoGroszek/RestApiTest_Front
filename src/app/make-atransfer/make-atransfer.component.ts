@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Transfer} from '../entities/transfer';
 import {TransferService} from '../services/transfer.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-make-atransfer',
@@ -12,14 +13,18 @@ export class MakeATransferComponent implements OnInit {
   transferFormGroup: FormGroup;
   transfer: Transfer = new Transfer();
 
-  constructor(private transferService: TransferService, private fb: FormBuilder) {
+  constructor(
+    private transferService: TransferService,
+    private fb: FormBuilder,
+    private toastr: ToastrService
+  ) {
   }
 
   ngOnInit() {
     this.transferFormGroup = this.fb.group({
-      sendingAccountNumber: ['',[Validators.required, Validators.pattern('^[0-9]*'),
+      sendingAccountNumber: ['', [Validators.required, Validators.pattern('^[0-9]*'),
         Validators.minLength(26), Validators.maxLength(26)]],
-      amount: [0, [Validators.required, Validators.pattern('^[1-9][0-9]*([.][0-9]{1,2})?$')]],
+      amount: [0, [Validators.required, Validators.pattern('^[0-9]*([.][0-9]{1,2})?$')]],
       targetAccountNumber: ['', [Validators.required, Validators.pattern('^[0-9]*'),
         Validators.minLength(26), Validators.maxLength(26)]]
     });
@@ -34,11 +39,21 @@ export class MakeATransferComponent implements OnInit {
   onSubmit() {
     if (this.transferFormGroup.invalid) {
       console.log('invalid');
+      this.showError();
       return;
     }
     this.setAccountDataFromForm();
     console.log(this.transfer);
-    // this.transferService.createTransfer(this.transfer).subscribe(data => this.transfer = data);
     this.transferService.createTransfer(this.transfer).subscribe();
+    this.showSuccess();
+
+  }
+
+  showSuccess() {
+    this.toastr.success('Wykonano przelew!');
+  }
+
+  showError() {
+    this.toastr.error('Sprawdź czy wszystkie pola są poprawne', 'Wykryto błąd w formularzu');
   }
 }
