@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Transfer} from '../entities/transfer';
 import {TransferService} from '../services/transfer.service';
 
@@ -17,9 +17,11 @@ export class MakeATransferComponent implements OnInit {
 
   ngOnInit() {
     this.transferFormGroup = this.fb.group({
-      sendingAccountNumber: '',
-      amount: 0,
-      targetAccountNumber: ''
+      sendingAccountNumber: ['',[Validators.required, Validators.pattern('^[0-9]*'),
+        Validators.minLength(26), Validators.maxLength(26)]],
+      amount: [0, [Validators.required, Validators.pattern('^[1-9][0-9]*([.][0-9]{1,2})?$')]],
+      targetAccountNumber: ['', [Validators.required, Validators.pattern('^[0-9]*'),
+        Validators.minLength(26), Validators.maxLength(26)]]
     });
   }
 
@@ -30,6 +32,10 @@ export class MakeATransferComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.transferFormGroup.invalid) {
+      console.log('invalid');
+      return;
+    }
     this.setAccountDataFromForm();
     console.log(this.transfer);
     // this.transferService.createTransfer(this.transfer).subscribe(data => this.transfer = data);

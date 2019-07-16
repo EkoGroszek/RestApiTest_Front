@@ -4,33 +4,41 @@
     <div class="form-group">
       <label for="accountNumber">Numer konta</label>
       <input name="accountNumber" type="text" class="form-control" id="accountNumber" formControlName="accountNumber">
-      <div
-        *ngIf="accountFormGroup.controls.accountNumber.invalid && (accountFormGroup.controls.accountNumber.dirty || accountFormGroup.controls.accountNumber.touched)"
-        class="alert alert-danger">
-        Błędny numer konta
+      <div *ngIf="accountFormGroup.controls.accountNumber.dirty || accountFormGroup.controls.accountNumber.touched">
+        <div *ngIf="accountFormGroup.get('accountNumber').hasError('pattern')" class="alert alert-danger">Numer konta
+          musi składać sie z samych cyfr
+        </div>
+        <div *ngIf="accountFormGroup.get('accountNumber').hasError('required')" class="alert alert-danger">Pole nie może
+          być puste
+        </div>
+        <div *ngIf="accountFormGroup.get('accountNumber').hasError('minlength')" class="alert alert-danger">Numer konta
+          jest za krótki
+        </div>
+        <div *ngIf="accountFormGroup.get('accountNumber').hasError('maxlength')" class="alert alert-danger">Numer konta
+          jest za długi
+        </div>
       </div>
     </div>
     <div class="form-group">
       <label for="balance">Saldo</label>
       <input type="text" class="form-control" formControlName="balance" id="balance" value="0" required>
       <div *ngIf="accountFormGroup.controls.balance.dirty || accountFormGroup.controls.balance.touched">
-        <div *ngIf="accountFormGroup.get('balance').hasError('pattern')" class="alert alert-danger">Zlyyy pattern</div>
-        <div *ngIf="accountFormGroup.get('balance').hasError('required')" class="alert alert-danger">required</div>
-        <!--      <div *ngIf="accountFormGroup.controls.balance.invalid && (accountFormGroup.controls.balance.dirty || accountFormGroup.controls.balance.touched)" class="alert alert-danger">-->
-        <!--        Błędna kwota-->
-        <!--      </div>-->
+        <div *ngIf="accountFormGroup.get('balance').hasError('pattern')" class="alert alert-danger">Błędna kwota</div>
+        <div *ngIf="accountFormGroup.get('balance').hasError('required')" class="alert alert-danger">Pole nie może być
+          puste
+        </div>
       </div>
     </div>
     <div class="form-group">
-      <label for="ownerId">Id właściciela</label>
-      <!--      <select class="form-control" id="ownerId" formControlName="currencies" required>-->
-      <!--        <option *ngFor="let owner of owners" [value]="owner">{{owner}}</option>-->
-      <!--      </select>-->
-      <input #owner type="text" class="form-control" formControlName="ownerId" id="ownerId">
-      <div
-        *ngIf="accountFormGroup.controls.ownerId.invalid && (accountFormGroup.controls.ownerId.dirty || accountFormGroup.controls.ownerId.touched)"
-        class="alert alert-danger">
-        Błędne Id
+      <label for="ownerId">Właściciel</label>
+      <select class="form-control" id="ownerId" formControlName="ownerId" required>
+        <option *ngFor="let owner of owners"
+                [value]="owner.id">{{owner.name + ' ' + owner.surname + ' ' + owner.id}}</option>
+      </select>
+      <div *ngIf="accountFormGroup.controls.ownerId.dirty || accountFormGroup.controls.ownerId.touched">
+        <div *ngIf="accountFormGroup.get('balance').hasError('required')" class="alert alert-danger">Pole nie może być
+          puste
+        </div>
       </div>
     </div>
     <div class="form-group">
@@ -42,12 +50,12 @@
     <div class="form-group">
       <label for="accountName">Nazwa konta </label>
       <input type="text" class="form-control" formControlName="accountName" id="accountName">
-      <div
-        *ngIf="accountFormGroup.controls.accountName.invalid && (accountFormGroup.controls.accountName.dirty || accountFormGroup.controls.accountName.touched)"
-        class="alert alert-danger">
-        Musisz podac nazwe konta
+      <div *ngIf="accountFormGroup.controls.accountName.dirty || accountFormGroup.controls.accountName.touched">
+        <div *ngIf="accountFormGroup.get('accountName').hasError('required')" class="alert alert-danger">Pole nie może
+          być puste
+        </div>
       </div>
     </div>
-    <button type="submit" class="btn btn-success">Submit</button>
+    <button type="submit" class="btn btn-success">Zapisz</button>
 
   </form>

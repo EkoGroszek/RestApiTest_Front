@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {IAccounts} from '../entities/accounts';
 import {Owner} from '../entities/owner';
 import {AccountService} from '../services/account.service';
+import {OwnerService} from '../services/owner.service';
 
 
 @Component({
@@ -12,26 +13,23 @@ import {AccountService} from '../services/account.service';
 
 })
 export class CreateAccountComponent implements OnInit {
-  private accounts: Account;
-  submitted = false;
 
-  constructor(private accountService: AccountService, private fb: FormBuilder) {
+
+  constructor(
+    private accountService: AccountService,
+    private ownerService: OwnerService,
+    private fb: FormBuilder) {
   }
 
+  private accounts: Account;
+  submitted = false;
   currencies = ['PLN', 'EUR', 'GBP'];
   // owners = new Map();
-  owners  = ['PLN', 'EUR', 'GBP'];
+  owners: Owner[];
   accountFormGroup: FormGroup;
   owner: Owner = new Owner();
   account: IAccounts = new IAccounts();
 
-  get f() {
-    return this.accountFormGroup.valid;
-  }
-  //
-  // putOwners() {
-  //   this.owner.set("A",1);
-  // }
 
   onSubmit() {
     this.submitted = true;
@@ -58,11 +56,17 @@ export class CreateAccountComponent implements OnInit {
     this.account.name = this.accountFormGroup.value.accountName;
   }
 
+  private getOwners() {
+    this.ownerService.getOwners().subscribe(data => this.owners = data);
+  }
+
   ngOnInit() {
+    this.getOwners();
     this.accountFormGroup = this.fb.group({
-      accountNumber: ['', [Validators.required, Validators.minLength(26), Validators.maxLength(26)]],
+      accountNumber: ['', [Validators.required, Validators.pattern('^[0-9]*'),
+        Validators.minLength(26), Validators.maxLength(26)]],
       balance: ['', [Validators.required, Validators.pattern('^[0-9]*([.][0-9]{1,2})?$')]],
-      ownerId: ['',  [Validators.required, Validators.pattern('^[0-9]*')]],
+      ownerId: ['', Validators.required],
       currencies: ['', Validators.required],
       accountName: ['', Validators.required]
     });
