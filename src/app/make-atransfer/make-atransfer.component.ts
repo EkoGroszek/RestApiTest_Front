@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Transfer} from '../entities/transfer';
 import {TransferService} from '../services/transfer.service';
 import {ToastrService} from 'ngx-toastr';
+import {IAccounts} from '../entities/accounts';
 
 @Component({
   selector: 'app-make-atransfer',
@@ -18,6 +19,8 @@ export class MakeATransferComponent implements OnInit {
     private fb: FormBuilder,
     private toastr: ToastrService
   ) {
+    this.transfer.targetAccount = new IAccounts();
+    this.transfer.sendingAccount= new IAccounts();
   }
 
   ngOnInit() {
@@ -32,8 +35,8 @@ export class MakeATransferComponent implements OnInit {
 
   private setAccountDataFromForm() {
     this.transfer.amount = this.transferFormGroup.value.amount;
-    this.transfer.sendingAccountNumber = this.transferFormGroup.value.sendingAccountNumber;
-    this.transfer.targetAccountNumber = this.transferFormGroup.value.targetAccountNumber;
+    this.transfer.sendingAccount.accountNumber = this.transferFormGroup.value.sendingAccountNumber;
+    this.transfer.targetAccount.accountNumber = this.transferFormGroup.value.targetAccountNumber;
   }
 
   onSubmit() {
@@ -44,8 +47,12 @@ export class MakeATransferComponent implements OnInit {
     }
     this.setAccountDataFromForm();
     console.log(this.transfer);
-    this.transferService.createTransfer(this.transfer).subscribe();
-    this.showSuccess();
+    this.transferService.createTransfer(this.transfer).subscribe(
+      data => {
+        this.showSuccess();
+      }, data => {
+        this.showError();
+      });
 
   }
 

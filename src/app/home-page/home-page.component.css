@@ -1,4 +1,10 @@
-h3{
-  font-size: 50px;
+h3 {
   align-items: center;
+  font-size: 50px;
+}
+
+.homeTitle {
+  padding-left: 30em;
+  padding-right: 30em;
+  padding-top: 5em;
 }

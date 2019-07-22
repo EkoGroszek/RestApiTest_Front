@@ -20,12 +20,16 @@
     <th scope="col">Z konta</th>
     <th scope="col">Na konto</th>
     <th scope="col">Kwota</th>
+    <th scope="col">Data nadania</th>
+    <th scope="col">Status</th>
   </tr>
   </thead>
   <tr *ngFor="let transfer of sendedTransfers">
-    <th *ngIf="transfer.sendingAccountNumber, else elseBlock">{{transfer.sendingAccountNumber}}</th>
-    <th *ngIf="transfer.targetAccountNumber, else elseBlock">{{transfer.targetAccountNumber}}</th>
+    <th *ngIf="transfer.sendingAccount.accountNumber, else elseBlock">{{transfer.sendingAccount.accountNumber}}</th>
+    <th *ngIf="transfer.targetAccount.accountNumber, else elseBlock">{{transfer.targetAccount.accountNumber}}</th>
     <th *ngIf="transfer.amount, else elseBlock">{{transfer.amount}}</th>
+    <th *ngIf="transfer.amount, else elseBlock">{{transfer.dateOfSendingTransfer}}</th>
+    <th *ngIf="transfer.amount, else elseBlock">{{transfer.status}}</th>
     <ng-template #elseBlock>
       <th>NO DATA</th>
     </ng-template>
@@ -41,12 +45,18 @@
     <th scope="col">Z konta</th>
     <th scope="col">Na konto</th>
     <th scope="col">Kwota</th>
+    <th scope="col">Data otrzymania</th>
+
+
   </tr>
   </thead>
   <tr *ngFor="let transfer of recievedTransfers">
-    <th *ngIf="transfer.sendingAccountNumber, else elseBlock">{{transfer.sendingAccountNumber}}</th>
-    <th *ngIf="transfer.targetAccountNumber, else elseBlock">{{transfer.targetAccountNumber}}</th>
+    <th *ngIf="transfer.sendingAccount.accountNumber, else elseBlock">{{transfer.sendingAccount.accountNumber}}</th>
+    <th *ngIf="transfer.targetAccount.accountNumber, else elseBlock">{{transfer.targetAccount.accountNumber}}</th>
     <th *ngIf="transfer.amount, else elseBlock">{{transfer.amount}}</th>
+    <th *ngIf="transfer.amount, else elseBlock">{{transfer.dateOfPostingTransfer}}</th>
+
+
     <ng-template #elseBlock>
       <th>NO DATA</th>
     </ng-template>

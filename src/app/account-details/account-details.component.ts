@@ -4,7 +4,7 @@ import {TransferService} from '../services/transfer.service';
 import {Transfer} from '../entities/transfer';
 import {AccountService} from '../services/account.service';
 import {IAccounts} from '../entities/accounts';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-account-details',
@@ -25,18 +25,14 @@ export class AccountDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.accountService.getAccountById(this.route.snapshot.paramMap.get('id')).subscribe(data => this.accountDetails = data);
-    this.transferService.getSendedTransfersListById(this.route.snapshot.paramMap.get('id')).subscribe(data => this.sendedTransfers = data);
-    this.transferService.getRecievedTransfersListById(this.route.snapshot.paramMap.get('id')).subscribe(data => this.recievedTransfers = data);
+    const id = this.route.snapshot.paramMap.get('id');
+    this.accountService.getAccountById(id).subscribe(data => this.accountDetails = data);
+    this.transferService.getSendedTransfersListById(id).subscribe(data => this.sendedTransfers = data);
+    this.transferService.getRecievedTransfersListById(id).subscribe(data => this.recievedTransfers = data);
   }
 
-  onClick(parm: string) {
-    console.log(' elo ');
-
-  }
-
-  btnClick = function(id) {
+  btnClick(id) {
     this.router.navigateByUrl('/accountsList/accountDetails/editName/' + id);
-  };
+  }
 
 }
