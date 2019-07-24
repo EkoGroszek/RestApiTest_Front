@@ -48,10 +48,8 @@ export class MakeATransferComponent implements OnInit {
     this.setAccountDataFromForm();
     console.log(this.transfer);
     this.transferService.createTransfer(this.transfer).subscribe(
-      data => {
-        this.showSuccess();
-      }, data => {
-        this.showError();
+      data => {this.showSuccess();      },
+        data => {this.showError();
       });
 
   }

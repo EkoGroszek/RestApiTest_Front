@@ -46,8 +46,13 @@ export class CreateAccountComponent implements OnInit {
     console.log(this.accountFormGroup.value.accountNumber);
     this.setAccountDataFromForm();
     console.log(this.account);
-    this.accountService.addAccount(this.account).subscribe(data => this.account = data);
-    this.showSuccess();
+    this.accountService.addAccount(this.account).subscribe(
+      data => {
+        this.account = data;
+        this.showSuccess();
+      },
+      data => {this.showError(); }
+    );
   }
 
 
@@ -77,7 +82,7 @@ export class CreateAccountComponent implements OnInit {
   }
 
   showSuccess() {
-    this.toastr.success('Wykonano przelew!');
+    this.toastr.success('Stworzono nowe konto !');
   }
 
   showError() {
