@@ -19,7 +19,8 @@ export class EditNameComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.changeAccountNameFormGroup = this.fb.group(
@@ -31,10 +32,12 @@ export class EditNameComponent implements OnInit {
   }
 
   onSubmit() {
-  this.updatedAccountName.accountName = this.changeAccountNameFormGroup.value.accountName;
-  console.log(this.updatedAccountName);
-  // accountId = this.route.snapshot.paramMap.get('id'));
-  this.accountService.updateAccountName(this.updatedAccountName, this.accountId).subscribe();
-  this.router.navigateByUrl('/accountsList/accountDetails/' + this.accountId);
+    this.updatedAccountName.accountName = this.changeAccountNameFormGroup.value.accountName;
+    console.log(this.updatedAccountName);
+    // accountId = this.route.snapshot.paramMap.get('id'));
+    this.accountService.updateAccountName(this.updatedAccountName, this.accountId).subscribe(
+      data => this.router.navigateByUrl('/accountsList/accountDetails/' + this.accountId)
+  )
+    ;
   }
 }

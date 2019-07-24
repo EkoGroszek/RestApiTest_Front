@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ExternalTransfer} from '../entities/externalTransfer';
+import {ToastrService} from 'ngx-toastr';
+import {ExternalTransferServiceService} from '../services/external-transfer-service.service';
 
 @Component({
   selector: 'app-make-external-transfer',
@@ -7,11 +10,15 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./make-external-transfer.component.css']
 })
 export class MakeExternalTransferComponent implements OnInit {
-
   transferFormGroup: FormGroup;
+  externalTransfer: ExternalTransfer = new ExternalTransfer();
+
   constructor(
+    private externalTransferService: ExternalTransferServiceService,
     private fb: FormBuilder,
-  ) { }
+    private toastr: ToastrService
+  ) {
+  }
 
   ngOnInit() {
     this.transferFormGroup = this.fb.group({
@@ -23,7 +30,30 @@ export class MakeExternalTransferComponent implements OnInit {
     });
   }
 
+  private setAccountDataFromForm() {
+    this.externalTransfer.amount = this.transferFormGroup.value.amount;
+    this.externalTransfer.externalAccount = this.transferFormGroup.value.sendingAccountNumber;
+    this.externalTransfer.toAccount = this.transferFormGroup.value.targetAccountNumber;
+  }
+
   onSubmit() {
-    console.log('pacz jkiż to piękny przelew');
+    if (this.transferFormGroup.invalid) {
+      console.log('invalid');
+      this.showError();
+      return;
+    }
+    this.setAccountDataFromForm();
+    console.log(this.externalTransfer);
+    this.externalTransferService.createTransfer(this.externalTransfer).subscribe(
+      data => {this.showSuccess(); },
+      data => {this.showError(); });
+  }
+
+  showSuccess() {
+    this.toastr.success('Wykonano przelew!');
+  }
+
+  showError() {
+    this.toastr.error('Sprawdź czy wszystkie pola są poprawne', 'Wykryto błąd w formularzu');
   }
 }
