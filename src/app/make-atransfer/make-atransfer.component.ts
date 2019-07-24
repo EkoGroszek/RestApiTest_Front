@@ -20,7 +20,7 @@ export class MakeATransferComponent implements OnInit {
     private toastr: ToastrService
   ) {
     this.transfer.targetAccount = new IAccounts();
-    this.transfer.sendingAccount= new IAccounts();
+    this.transfer.sendingAccount = new IAccounts();
   }
 
   ngOnInit() {
