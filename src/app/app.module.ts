@@ -16,6 +16,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ToastrModule} from 'ngx-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MakeExternalTransferComponent } from './make-external-transfer/make-external-transfer.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     AccountsListComponent,
     AccountDetailsComponent,
     EditNameComponent,
+    MakeExternalTransferComponent,
   ],
   imports: [
     BrowserModule,
