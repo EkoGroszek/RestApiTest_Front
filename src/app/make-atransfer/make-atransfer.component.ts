@@ -29,8 +29,10 @@ export class MakeATransferComponent implements OnInit {
         Validators.minLength(26), Validators.maxLength(26)]],
       amount: [0, [Validators.required, Validators.pattern('^[0-9]*([.][0-9]{1,2})?$')]],
       targetAccountNumber: ['', [Validators.required, Validators.pattern('^[0-9]*'),
-        Validators.minLength(26), Validators.maxLength(26)]]
-    });
+        Validators.minLength(26), Validators.maxLength(26)]],
+      ifSendEmail: false
+  })
+    ;
   }
 
   private setAccountDataFromForm() {
@@ -48,8 +50,11 @@ export class MakeATransferComponent implements OnInit {
     this.setAccountDataFromForm();
     console.log(this.transfer);
     this.transferService.createTransfer(this.transfer).subscribe(
-      data => {this.showSuccess();      },
-        data => {this.showError();
+      data => {
+        this.showSuccess();
+      },
+      data => {
+        this.showError();
       });
 
   }
@@ -60,5 +65,9 @@ export class MakeATransferComponent implements OnInit {
 
   showError() {
     this.toastr.error('Sprawdź czy wszystkie pola są poprawne', 'Wykryto błąd w formularzu');
+  }
+
+  toggleToSendingEmail() {
+
   }
 }

@@ -49,6 +49,13 @@
         </div>
       </div>
     </div>
+    <div class="form-group">
+<!--      <mdb-checkbox (click)="toggleToSendingEmail(sendEmail)"formControlName="sendEmail" id="sendEmail">Chcę otrzymać e-mail</mdb-checkbox>-->
+      <input type="checkbox" formControlName="ifSendEmail" id="ifSendEmail">
+      <span> &nbsp;</span>
+      <label for="ifSendEmail"> Czy wysłać e-maial ?</label>
+
+    </div>
     <button type="submit" class="btn btn-success">Wykonaj</button>
 
   </form>
