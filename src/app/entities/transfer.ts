@@ -7,8 +7,6 @@ export class Transfer {
 
   amount: number;
 
-  // targetAccountNumber: string;
-
   targetAccount: IAccounts;
 
   dateOfSendingTransfer: string;
@@ -16,6 +14,10 @@ export class Transfer {
   dateOfPostingTransfer: string;
 
   status: string;
+
+  emailAddress: string;
+
+  ifSendEmail: boolean;
 
   constructor() {
   }

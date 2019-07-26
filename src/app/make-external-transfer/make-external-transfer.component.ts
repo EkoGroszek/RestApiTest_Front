@@ -12,6 +12,7 @@ import {ExternalTransferServiceService} from '../services/external-transfer-serv
 export class MakeExternalTransferComponent implements OnInit {
   transferFormGroup: FormGroup;
   externalTransfer: ExternalTransfer = new ExternalTransfer();
+  isDisabled = false;
 
   constructor(
     private externalTransferService: ExternalTransferServiceService,
@@ -26,7 +27,9 @@ export class MakeExternalTransferComponent implements OnInit {
         Validators.minLength(26), Validators.maxLength(26)]],
       amount: [0, [Validators.required, Validators.pattern('^[0-9]*([.][0-9]{1,2})?$')]],
       targetAccountNumber: ['', [Validators.required, Validators.pattern('^[0-9]*'),
-        Validators.minLength(26), Validators.maxLength(26)]]
+        Validators.minLength(26), Validators.maxLength(26)]],
+      ifSendEmail: false,
+      emailAddress: ''
     });
   }
 
@@ -34,6 +37,11 @@ export class MakeExternalTransferComponent implements OnInit {
     this.externalTransfer.amount = this.transferFormGroup.value.amount;
     this.externalTransfer.externalAccount = this.transferFormGroup.value.sendingAccountNumber;
     this.externalTransfer.toAccount = this.transferFormGroup.value.targetAccountNumber;
+    this.externalTransfer.ifSendEmail = this.transferFormGroup.value.ifSendEmail;
+
+    if (this.transferFormGroup.value.ifSendEmail) {
+      this.externalTransfer.emailAddress = this.transferFormGroup.value.emailAddress;
+    }
   }
 
   onSubmit() {
@@ -45,8 +53,12 @@ export class MakeExternalTransferComponent implements OnInit {
     this.setAccountDataFromForm();
     console.log(this.externalTransfer);
     this.externalTransferService.createTransfer(this.externalTransfer).subscribe(
-      data => {this.showSuccess(); },
-      data => {this.showError(); });
+      data => {
+        this.showSuccess();
+      },
+      data => {
+        this.showError();
+      });
   }
 
   showSuccess() {
@@ -55,5 +67,10 @@ export class MakeExternalTransferComponent implements OnInit {
 
   showError() {
     this.toastr.error('Sprawdź czy wszystkie pola są poprawne', 'Wykryto błąd w formularzu');
+  }
+
+  toggleIfSendingEmail() {
+    this.isDisabled = !this.isDisabled;
+    return;
   }
 }

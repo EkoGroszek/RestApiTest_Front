@@ -4,7 +4,8 @@
     <div class="form-group">
       <label for="sendingAccountNumber">Z konta</label>
       <input type="text" class="form-control" formControlName="sendingAccountNumber" id="sendingAccountNumber" required>
-      <div *ngIf="transferFormGroup.controls.sendingAccountNumber.dirty || transferFormGroup.controls.sendingAccountNumber.touched">
+      <div
+        *ngIf="transferFormGroup.controls.sendingAccountNumber.dirty || transferFormGroup.controls.sendingAccountNumber.touched">
         <div *ngIf="transferFormGroup.get('sendingAccountNumber').hasError('pattern')" class="alert alert-danger">
           Numer konta musi składać sie z samych cyfr
         </div>
@@ -34,7 +35,8 @@
     <div class="form-group">
       <label for="targetAccountNumber">Na konto</label>
       <input #owner type="text" class="form-control" formControlName="targetAccountNumber" id="targetAccountNumber">
-      <div *ngIf="transferFormGroup.controls.targetAccountNumber.dirty || transferFormGroup.controls.targetAccountNumber.touched">
+      <div
+        *ngIf="transferFormGroup.controls.targetAccountNumber.dirty || transferFormGroup.controls.targetAccountNumber.touched">
         <div *ngIf="transferFormGroup.get('targetAccountNumber').hasError('pattern')" class="alert alert-danger">
           Numer konta musi składać sie z samych cyfr
         </div>
@@ -50,8 +52,13 @@
       </div>
     </div>
     <div class="form-group">
-<!--      <mdb-checkbox (click)="toggleToSendingEmail(sendEmail)"formControlName="sendEmail" id="sendEmail">Chcę otrzymać e-mail</mdb-checkbox>-->
-      <input type="checkbox" formControlName="ifSendEmail" id="ifSendEmail">
+
+      <div *ngIf="isDisabled" class="form-group">
+        <label for="targetAccountNumber">Adres e-mail</label>
+        <input type="text" class="form-control" formControlName="emailAddress" id="emailAddress">
+      </div>
+      <!--      <mdb-checkbox (click)="toggleToSendingEmail(sendEmail)"formControlName="sendEmail" id="sendEmail">Chcę otrzymać e-mail</mdb-checkbox>-->
+      <input type="checkbox" formControlName="ifSendEmail" id="ifSendEmail" (change)="toggleIfSendingEmail()">
       <span> &nbsp;</span>
       <label for="ifSendEmail"> Czy wysłać e-maial ?</label>
 

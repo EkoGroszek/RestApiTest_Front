@@ -12,6 +12,10 @@ export class ExternalTransfer {
 
   toAccount: string;
 
+  emailAddress: string;
+
+  ifSendEmail: boolean;
+
   constructor() {
   }
 }

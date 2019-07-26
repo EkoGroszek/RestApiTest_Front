@@ -13,6 +13,8 @@ import {IAccounts} from '../entities/accounts';
 export class MakeATransferComponent implements OnInit {
   transferFormGroup: FormGroup;
   transfer: Transfer = new Transfer();
+  isDisabled = false;
+
 
   constructor(
     private transferService: TransferService,
@@ -30,8 +32,9 @@ export class MakeATransferComponent implements OnInit {
       amount: [0, [Validators.required, Validators.pattern('^[0-9]*([.][0-9]{1,2})?$')]],
       targetAccountNumber: ['', [Validators.required, Validators.pattern('^[0-9]*'),
         Validators.minLength(26), Validators.maxLength(26)]],
-      ifSendEmail: false
-  })
+      ifSendEmail: false,
+      emailAddress: ''
+    })
     ;
   }
 
@@ -39,6 +42,10 @@ export class MakeATransferComponent implements OnInit {
     this.transfer.amount = this.transferFormGroup.value.amount;
     this.transfer.sendingAccount.accountNumber = this.transferFormGroup.value.sendingAccountNumber;
     this.transfer.targetAccount.accountNumber = this.transferFormGroup.value.targetAccountNumber;
+    this.transfer.ifSendEmail = this.transferFormGroup.value.ifSendEmail;
+    if (this.transferFormGroup.value.ifSendEmail) {
+      this.transfer.emailAddress = this.transferFormGroup.value.emailAddress;
+    }
   }
 
   onSubmit() {
@@ -56,6 +63,7 @@ export class MakeATransferComponent implements OnInit {
       data => {
         this.showError();
       });
+    console.log(this.transfer);
 
   }
 
@@ -67,7 +75,8 @@ export class MakeATransferComponent implements OnInit {
     this.toastr.error('Sprawdź czy wszystkie pola są poprawne', 'Wykryto błąd w formularzu');
   }
 
-  toggleToSendingEmail() {
-
+  toggleIfSendingEmail() {
+    this.isDisabled = !this.isDisabled;
+    return;
   }
 }
