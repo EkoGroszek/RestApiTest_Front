@@ -33,7 +33,7 @@ export class MakeATransferComponent implements OnInit {
       targetAccountNumber: ['', [Validators.required, Validators.pattern('^[0-9]*'),
         Validators.minLength(26), Validators.maxLength(26)]],
       ifSendEmail: false,
-      emailAddress: ''
+      emailAddress: [' ', Validators.email]
     })
     ;
   }

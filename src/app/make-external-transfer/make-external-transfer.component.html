@@ -56,6 +56,12 @@
       <div *ngIf="isDisabled" class="form-group">
         <label for="targetAccountNumber">Adres e-mail</label>
         <input type="text" class="form-control" formControlName="emailAddress" id="emailAddress">
+        <div
+          *ngIf="transferFormGroup.controls.emailAddress.dirty || transferFormGroup.controls.emailAddress.touched">
+          <div *ngIf="transferFormGroup.get('emailAddress').hasError('email')" class="alert alert-danger">
+            Nieprawidłowy adres e-mail
+          </div>
+        </div>
       </div>
       <!--      <mdb-checkbox (click)="toggleToSendingEmail(sendEmail)"formControlName="sendEmail" id="sendEmail">Chcę otrzymać e-mail</mdb-checkbox>-->
       <input type="checkbox" formControlName="ifSendEmail" id="ifSendEmail" (change)="toggleIfSendingEmail()">
